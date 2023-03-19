@@ -1,0 +1,40 @@
+# ymlファイルのバージョン指定
+version: '3'
+# 定義するサービスの一覧
+services:
+  # Djangoアプリを含むサービス
+  web:
+    # Dockerfile を含むパスの指定
+    build: .
+    # サービス開始のためのコマンド
+    command: python manage.py runserver 0.0.0.0:8000
+    # DockerコンテナとホストOSの間でポートをマッピングするための指定(ここでは、ホストOSの8000番ポートとDockerコンテナの8000番ポートをマッピング)
+    ports:
+      - "8000:8000"
+    # DockerコンテナとホストOSの間でディレクトリをマウントするための指定(ここでは、ホストOSのカレントディレクトリとDockerコンテナ内の/appディレクトリをマウント)
+    volumes:
+      - .:/app
+    # 他のサービスが開始される前にこのサービスを開始する必要がある場合に使用する指定(ここでは、dbサービスが開始された後にwebサービスを開始するように指定)
+    depends_on:
+      - db
+  # PostgreSQLデータベースを含むサービス
+  db:
+    # 使用するDockerイメージを指定
+    image: postgres
+    ports:
+      - "5432"
+    # サービスを開始するために必要な環境変数を指定
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    # DockerコンテナとホストOSの間でディレクトリをマウントするための指定
+    volumes:
+      - todo-data:/var/lib/postgresql/data/
+  
+# 定義されたボリュームの一覧
+volumes:
+  todo-data:
+
+
+
