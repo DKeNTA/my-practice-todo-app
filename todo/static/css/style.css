@@ -1,5 +1,5 @@
 body {
-    background-color: #b4e7cf;
+    background-color: #abdec6;
 }
 
 .navbar {
@@ -8,7 +8,7 @@ body {
 
 .my-navbar {
     align-items: center;
-    background: #d3de75;
+    background: #e5f58d;
     display: frex;
     height: 6rem;
     justify-content: space-between;
@@ -22,7 +22,7 @@ body {
 
 .my-navbar-brand,
 .my-navbar-item {
-    color: #b4e7cf
+    color: #1ea365
 }
 
 .my-navbar-brand:hover,
@@ -31,8 +31,8 @@ a.my-navbar-item:hover {
 }
 
 .panel-default>.panel-heading {
-    color: #d3de75;
-    background-color: #9bdeac;
+    color: #dae480;
+    background-color: #3bc55e;
     border-color: #c0d7f4;
 }
 
