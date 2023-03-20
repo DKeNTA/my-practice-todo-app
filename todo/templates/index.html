@@ -1,80 +1,62 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width" initial-scale="1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Todo</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootflat/2.0.4/css/bootflat.min.css">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    </head>
-    <body>
-        <header>
-            <nav class="my-navbar">
-                <a class="my-navbar-brand" href="folders/1/tasks">Todo</a>
-            </nav>
-        </header>
-        <main>
-            <div class="container">
-                <div class="row">
-                    <div class="col col-md-4">
-                        <nav class="panel panel-default">
-                            <div class="panel-heading">フォルダー</div>
-                            <div class="list-group">
-                                {% for folder in folders %}
-                                    <a 
-                                    href="{% url 'tasks.index' id=folder.id %}" 
-                                    class="list-group-item {% if current_folder_id == folder.id %}active{% endif %}">
-                                        {{ folder.title }}
-                                    </a>
-                                {% endfor %}
-                            </div>
-                            <div class="panel-body">
-                                <a href="#" class="btn btn-default btn-block">
-                                    フォルダーを追加する
-                                </a>
-                            </div>
-                        </nav>                       
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-4">
+                <nav class="panel panel-default">
+                    <div class="panel-heading">フォルダー</div>
+                    <div class="list-group">
+                        {% for folder in folders %}
+                            <a 
+                            href="{% url 'tasks.index' id=folder.id %}" 
+                            class="list-group-item {% if current_folder_id == folder.id %}active{% endif %}">
+                                {{ folder.title }}
+                            </a>
+                        {% endfor %}
                     </div>
-                    <div class="column col-md-8">
-                        <div class="panel panel-default">
-                            <div class="panel panel-heading">タスク</div>
-                            <table class="table">
-                                <thead>      
-                                    <tr>
-                                        <th>タイトル</th>
-                                        <th>状態</th>
-                                        <th>期限</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for task in tasks %}
-                                    <tr>
-                                        <td>{{ task.title }}</td>
-                                        <td>
-                                            <span class="label {% if task.status == 1 %}label-danger{% endif %}{% if task.status == 2 %}label-info{% endif %}">
-                                                {{ task.get_status_display }}
-                                            </span>
-                                        </td>
-                                        <td>{{ task.due_date }}</td>
-                                        <td><a href="#">編集</a></td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            <div class="panel-body">
-                                <div class="text-right">
-                                    <a href="#">
-                                        タスクを追加する
-                                    </a>
-                                </div>
-                            </div>
+                    <div class="panel-body">
+                        <a href="{% url 'folders.create' %}" class="btn btn-default btn-block">
+                            フォルダーを追加する
+                        </a>
+                    </div>
+                </nav>                       
+            </div>
+            <div class="column col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel panel-heading">タスク</div>
+                    <table class="table">
+                        <thead>      
+                            <tr>
+                                <th>タイトル</th>
+                                <th>状態</th>
+                                <th>期限</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in tasks %}
+                            <tr>
+                                <td>{{ task.title }}</td>
+                                <td>
+                                    <span class="label {% if task.status == 1 %}label-danger{% endif %}{% if task.status == 2 %}label-info{% endif %}">
+                                        {{ task.get_status_display }}
+                                    </span>
+                                </td>
+                                <td>{{ task.due_date }}</td>
+                                <td><a href="#">編集</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="panel-body">
+                        <div class="text-right">
+                            <a href="{% url 'tasks.create' id=current_folder_id %}" class="btn btn-default btn-block">
+                                タスクを追加する
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
-    </body>
-</html>
+        </div>
+    </div>
+{% endblock %}
