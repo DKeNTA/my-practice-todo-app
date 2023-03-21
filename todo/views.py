@@ -48,3 +48,23 @@ def create_task(request, id):
         'form': form,
         'current_folder_id': current_folder.id
     })
+
+def edit_task(request, id, task_id):
+    folders = Folder.objects.filter(created_at__lte=timezone.now()).order_by('created_at')
+    # 選ばれたタスクを取得する
+    current_folder = get_object_or_404(Folder, id=id)
+    task = get_object_or_404(Task, id=task_id)
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.save()
+            return redirect('tasks.index', id=task.folder_id.id)
+    else:
+        form = TaskForm(instance=task)
+    return render(request, 'edit_tasks.html', {
+        'folders': folders,
+        'form': form,
+        'current_folder_id': current_folder.id,
+        'task': task
+    })

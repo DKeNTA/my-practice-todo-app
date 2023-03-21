@@ -38,14 +38,14 @@ a.my-navbar-item:hover {
 
 a.list-group-item:hover {
     color: #fff;
-    background-color: #62e482;
+    background-color: #96f7ae;
 }
 
 a.list-group-item:active,
 a.list-group-item:active:focus,
 a.list-group-item:active:hover {
     color: #fff;
-    background-color: #62e482;
+    background-color: #96f7ae;
     border-color: #c0d7f4;
 }
 
@@ -60,7 +60,7 @@ a:hocer {
 
 .btn-default:hover {
     color: #fff;
-    background-color: #474a;
+    background-color: #96f7ae;
 }
 
 .btn {
