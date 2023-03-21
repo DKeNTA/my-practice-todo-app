@@ -16,6 +16,10 @@
         <header>
             <nav class="my-navbar">
                 <a class="my-navbar-brand">Todo</a>
+                {% if user.is_authenticated %}           
+                    <span>ようこそ、{{ user.username }} さん</span>
+                    <a href="{% url 'logout' %}">ログアウト</a>
+                {% endif %}
             </nav>
         </header>
         <main>
