@@ -30,9 +30,21 @@ a.my-navbar-item:hover {
     color: #ed9c9c
 }
 
+.panel-default {
+    border-color: #c0d7f4;
+}
+
 .panel-default>.panel-heading {
     color: #f4f8ce;
     background-color: #3bc55e;
+    border-color: #c0d7f4;
+}
+
+.panel-default>.panel-footer {
+    background-color: #fff;
+}
+
+a.list-group-item {
     border-color: #c0d7f4;
 }
 
@@ -46,7 +58,6 @@ a.list-group-item:active:focus,
 a.list-group-item:active:hover {
     color: #fff;
     background-color: #96f7ae;
-    border-color: #c0d7f4;
 }
 
 a {

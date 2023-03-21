@@ -1,0 +1,44 @@
+{% extends '../base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-offset-3 col-md-6">
+                <nav class="panel panel-default">
+                    <div class="panel-heading">ユーザーログイン</div>
+                    <div class="panel-body">
+                        <form method="POST" class="">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                <div class="form-group has-feedback">
+                                  {{ field }}
+                                </div>
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div class="alert alert-danger" role="alert">
+                                  <p>{{ error }}</p>
+                                </div>
+                            {% endfor %}
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">ログイン</button>
+                            </div>
+                            {% if form.errors %}
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endif %} 
+                        </form>                       
+                    </div>
+                    <div class="panel-footer">
+                        <label for="register-btn">アカウントを持っていない場合:</label>
+                        <div class="text-center">
+                            <a href="{% url 'register' %}" id="register-btn" class="btn btn-primary">サインアップ</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
