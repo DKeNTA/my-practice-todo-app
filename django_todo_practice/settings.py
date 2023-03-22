@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-#3#*@ue^6w7$i4qg+nak@tzo_jt#!6&$18@sx5t66(3+fmu-m&')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'Render' not in os.environ
+DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = []
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
