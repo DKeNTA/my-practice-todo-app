@@ -27,22 +27,29 @@ class Logout(LogoutView):
     template_name = 'registration/login.html'
 
 @login_required
-def index(request, id):
+def index(request):
     # 全てのフォルダを取得する
     folders = Folder.objects.filter(user=request.user, created_at__lte=timezone.now()).order_by('created_at')  # lte: less than or equal to
-    # idが0でなければ、選ばれたフォルダを取得する
-    if id == 0:
-        current_folder_id = 0
-    else:
-        current_folder = get_object_or_404(Folder, id=id, user=request.user)
-        current_folder_id = current_folder.id
+
+    return render(request, 'index.html', {
+        'folders': folders,
+        'tasks': None,
+        'current_folder_id': None
+        })
+
+@login_required
+def tasks_index(request, id):
+    # 全てのフォルダを取得する
+    folders = Folder.objects.filter(user=request.user, created_at__lte=timezone.now()).order_by('created_at')  # lte: less than or equal to
+    # 選ばれたフォルダを取得する
+    current_folder = get_object_or_404(Folder, id=id, user=request.user)
     # 選ばれたフォルダのタスクを取得する
-    tasks = Task.objects.filter(folder_id=current_folder_id)
+    tasks = Task.objects.filter(folder_id=current_folder.id)
 
     return render(request, 'index.html', {
         'folders': folders,
         'tasks': tasks,
-        'current_folder_id': current_folder_id
+        'current_folder_id': current_folder.id
         })
 
 def create_folder(request):
