@@ -84,8 +84,8 @@ if DEBUG:
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'postgres',
-            'USER': 'root',
-            'PASSWORD': 'password',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
             'HOST': 'db',
             'PORT': 5432,
         }
@@ -143,5 +143,5 @@ else:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/login' 
-LOGIN_REDIRECT_URL = '/folders/0/tasks'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL='/login'
