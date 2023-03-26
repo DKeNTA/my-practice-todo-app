@@ -12,6 +12,7 @@
             {% csrf_token %}
             {{ form.as_p }}
             <div class="text-right">
+                <a href="{% url 'tasks.delete' folder_id=current_folder_id task_id=task_id %}" class="btn btn-danger">削除</a>
                 <button type="submit" class="btn btn-primary">完了</button>
             </div>
         </form>
