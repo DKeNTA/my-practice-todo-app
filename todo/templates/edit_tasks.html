@@ -6,12 +6,12 @@
 {% endblock %}
 
 {% block task_content %}
-    <div class="panel-heading">タスクを編集する</div>
-    <div class="panel-body">
+    <div class="card-header">タスクを編集する</div>
+    <div class="card-body">
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <div class="text-right">
+            <div class="text-end">
                 <a href="{% url 'tasks.delete' folder_id=current_folder_id task_id=task_id %}" class="btn btn-danger">削除</a>
                 <button type="submit" class="btn btn-primary">完了</button>
             </div>

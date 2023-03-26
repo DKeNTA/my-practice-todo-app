@@ -10,14 +10,14 @@ body {
     align-items: center;
     background: #e5f58d;
     display: frex;
-    height: 6rem;
+    height: 5rem;
     justify-content: space-between;
     padding: 0 2%;
     margin-bottom: 3rem;
 }
 
 .my-navbar-brand {
-    font-size: 40px;
+    font-size: 50px;
 }
 
 .my-navbar-brand,
@@ -30,17 +30,17 @@ a.my-navbar-item:hover {
     color: #ed9c9c
 }
 
-.panel-default {
+.card {
     border-color: #c0d7f4;
 }
 
-.panel-default>.panel-heading {
+.card-header {
     color: #f4f8ce;
     background-color: #3bc55e;
     border-color: #c0d7f4;
 }
 
-.panel-default>.panel-footer {
+.card-footer {
     background-color: #fff;
 }
 
