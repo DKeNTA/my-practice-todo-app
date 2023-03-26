@@ -4,98 +4,99 @@
     <div class="container">
         <div class="row">
             <div class="col col-md-4">
-                <nav class="panel panel-default">
-                    <div class="panel-heading">フォルダー</div>
-                    <div class="list-group">
-                        {% for folder in folders %}
-                            <a 
-                            href="{% url 'tasks.index' folder_id=folder.id %}" 
-                            class="list-group-item 
-                            {% if folder.id == current_folder_id %}
-                            active
-                            {% endif %}">
-                                {{ folder.title }}
-                            </a>
-                        {% endfor %}
+                <div class="card">
+                    <div class="card-header">フォルダー</div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            {% for folder in folders %}
+                                <a 
+                                href="{% url 'tasks.index' folder_id=folder.id %}" 
+                                class="list-group-item 
+                                {% if folder.id == current_folder_id %}
+                                active
+                                {% endif %}">
+                                    {{ folder.title }}
+                                </a>
+                            {% endfor %}
+                        </ul>
                     </div>
-                    <div class="panel-body">
-                        <a href="{% url 'folders.create' %}" class="btn btn-default btn-block">
+                    <div class="card-footer">
+                        <a href="{% url 'folders.create' %}" class="btn btn-default w-100" role="button">
                             フォルダーを追加する
                         </a>
-                    </div>
-                </nav>                       
+                    </div>    
+                </div>                       
             </div>
             <div class="column col-md-8">
-                <div class="panel panel-default">
+                <div class="card">
                     {% block task_content %}
-                    <div class="panel panel-heading">タスク</div>
-                    {% if current_folder_id %}
-                        <table class="table">
-                            <thead>      
-                                <tr>
-                                    <th>タイトル</th>
-                                    <th>状態</th>
-                                    <th>期限</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for task in tasks %}
-                                <tr>
-                                    <td>{{ task.title }}</td>
-                                    <td>
-                                        <span class="label {% if task.status == 1 %}label-danger{% endif %}{% if task.status == 2 %}label-info{% endif %}">
-                                            {{ task.get_status_display }}
-                                        </span>
-                                    </td>
-                                    <td>{{ task.due_date }}</td>
-                                    <td><a href="{% url 'tasks.edit' folder_id=current_folder_id task_id=task.id %}">編集</a></td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        <div class="panel-body">
-                            <div class="text-right">
-                                <button 
-                                type="button"
-                                class="btn btn-danger" 
-                                data-toggle="modal"
-                                data-target="#deleteModal"
-                                data-url="{% url 'folders.delete' folder_id=current_folder_id %}"
-                                >
-                                    フォルダーを削除する
-                                </button>
-                                <div 
-                                class="modal faid" 
-                                id="deleteModal" 
-                                tabindex="-1"
-                                role="dialog"
-                                aria-labelledby="deleteModalLabel"
-                                aria-hidden="true"
-                                >
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="deleteModalLabel">削除確認</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                本当に削除しますか？
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-                                                <a href="{% url 'folders.delete' folder_id=current_folder_id %}" class="btn btn-danger" id="deleteButton">削除</a>
+                        <div class="card-header">タスク</div>
+                        {% if current_folder_id %}
+                            <div class="card-body">                           
+                                <table class="table">
+                                    <thead>      
+                                        <tr>
+                                            <th>タイトル</th>
+                                            <th>状態</th>
+                                            <th>期限</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for task in tasks %}
+                                            <tr>
+                                                <td>{{ task.title }}</td>
+                                                <td>
+                                                    <span class="badge {% if task.status == 1 %}bg-danger{% endif %}{% if task.status == 2 %}bg-info{% endif %}">
+                                                        {{ task.get_status_display }}
+                                                    </span>
+                                                </td>
+                                                <td>{{ task.due_date }}</td>
+                                                <td><a href="{% url 'tasks.edit' folder_id=current_folder_id task_id=task.id %}">編集</a></td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer">
+                                <div class="text-end">
+                                    <button 
+                                    type="button"
+                                    class="btn btn-danger" 
+                                    data-toggle="modal"
+                                    data-target="#deleteModal"
+                                    data-url="{% url 'folders.delete' folder_id=current_folder_id %}">
+                                        フォルダーを削除する
+                                    </button>
+                                    <div 
+                                    class="modal faid" 
+                                    id="deleteModal" 
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-labelledby="deleteModalLabel"
+                                    aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deleteModalLabel">削除確認</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    本当に削除しますか？
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                                                    <a href="{% url 'folders.delete' folder_id=current_folder_id %}" class="btn btn-danger" id="deleteButton">削除</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <a href="{% url 'tasks.create' folder_id=current_folder_id %}" class="btn btn-default">
+                                        タスクを追加する
+                                    </a>
                                 </div>
-                                <a href="{% url 'tasks.create' folder_id=current_folder_id %}" class="btn btn-default">
-                                    タスクを追加する
-                                </a>
-                            </div>
-                    {% endif %}
-                    </div>
+                        {% endif %}
                     {% endblock %}
                 </div>
             </div>

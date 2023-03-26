@@ -60,7 +60,7 @@ def create_folder(request):
             folder.user = request.user
             folder.created_at = timezone.now()
             folder.save()
-            return redirect('tasks.index', id=folder.id)
+            return redirect('tasks.index', folder_id=folder.id)
     else:
         form = FolderForm()
     return render(request, 'create_folders.html', {'form': form})
