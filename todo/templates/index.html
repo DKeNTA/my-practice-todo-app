@@ -46,9 +46,18 @@
                                             <tr>
                                                 <td>{{ task.title }}</td>
                                                 <td>
-                                                    <span class="badge {% if task.status == 1 %}bg-danger{% endif %}{% if task.status == 2 %}bg-info{% endif %}">
-                                                        {{ task.get_status_display }}
-                                                    </span>
+                                                    <div class="text-center">
+                                                        <span class="badge 
+                                                        {% if task.status == 1 %}
+                                                            bg-danger
+                                                        {% elif task.status == 2 %}
+                                                            bg-info
+                                                        {% elif task.status == 3 %}   
+                                                            bg-success  
+                                                        {% endif %}">
+                                                            {{ task.get_status_display }}
+                                                        </span>
+                                                    </div>
                                                 </td>
                                                 <td>{{ task.due_date }}</td>
                                                 <td><a href="{% url 'tasks.edit' folder_id=current_folder_id task_id=task.id %}">編集</a></td>
