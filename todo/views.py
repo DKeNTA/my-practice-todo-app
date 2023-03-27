@@ -38,11 +38,11 @@ def index(request):
         })
 
 @login_required
-def tasks_index(request, id):
+def tasks_index(request, folder_id):
     # 全てのフォルダを取得する
     folders = Folder.objects.filter(user=request.user, created_at__lte=timezone.now()).order_by('created_at')  # lte: less than or equal to
     # 選ばれたフォルダを取得する
-    current_folder = get_object_or_404(Folder, id=id, user=request.user)
+    current_folder = get_object_or_404(Folder, id=folder_id, user=request.user)
     # 選ばれたフォルダのタスクを取得する
     tasks = Task.objects.filter(folder_id=current_folder.id)
 
@@ -60,15 +60,15 @@ def create_folder(request):
             folder.user = request.user
             folder.created_at = timezone.now()
             folder.save()
-            return redirect('tasks.index', id=folder.id)
+            return redirect('tasks.index', folder_id=folder.id)
     else:
         form = FolderForm()
     return render(request, 'create_folders.html', {'form': form})
 
-def create_task(request, id):
+def create_task(request, folder_id):
     folders = Folder.objects.filter(user=request.user, created_at__lte=timezone.now()).order_by('created_at') 
     # 選ばれだフォルダを取得する
-    current_folder = get_object_or_404(Folder, id=id, user=request.user)
+    current_folder = get_object_or_404(Folder, id=folder_id, user=request.user)
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
@@ -76,7 +76,7 @@ def create_task(request, id):
             task.created_at = timezone.now()
             task.folder = current_folder
             task.save()
-            return redirect('tasks.index', id=current_folder.id)
+            return redirect('tasks.index', folder_id=current_folder.id)
     else:
         form = TaskForm()
     return render(request, 'create_tasks.html', {
@@ -85,22 +85,32 @@ def create_task(request, id):
         'current_folder_id': current_folder.id
     })
 
-def edit_task(request, id, task_id):
+def edit_task(request, folder_id, task_id):
     folders = Folder.objects.filter(user=request.user, created_at__lte=timezone.now()).order_by('created_at')
     # 選ばれたタスクを取得する
-    current_folder = get_object_or_404(Folder, id=id, user=request.user)
+    current_folder = get_object_or_404(Folder, id=folder_id, user=request.user)
     task = get_object_or_404(Task, id=task_id)
     if request.method == 'POST':
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             task = form.save(commit=False)
             task.save()
-            return redirect('tasks.index', id=task.folder.id)
+            return redirect('tasks.index', folder_id=task.folder.id)
     else:
         form = TaskForm(instance=task)
     return render(request, 'edit_tasks.html', {
         'folders': folders,
         'form': form,
         'current_folder_id': current_folder.id,
-        'task': task
+        'task_id': task.id
     })
+
+def delete_folder(request, folder_id):
+    folder = get_object_or_404(Folder, id=folder_id, user=request.user)
+    folder.delete()
+    return redirect('folders.index')
+
+def delete_task(request, folder_id, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    task.delete()
+    return redirect('tasks.index', folder_id=folder_id)

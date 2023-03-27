@@ -10,14 +10,14 @@ body {
     align-items: center;
     background: #e5f58d;
     display: frex;
-    height: 6rem;
+    height: 5rem;
     justify-content: space-between;
     padding: 0 2%;
     margin-bottom: 3rem;
 }
 
 .my-navbar-brand {
-    font-size: 40px;
+    font-size: 50px;
 }
 
 .my-navbar-brand,
@@ -27,20 +27,20 @@ body {
 
 .my-navbar-brand:hover,
 a.my-navbar-item:hover {
-    color: #ed9c9c
+    color: #5be6a5
 }
 
-.panel-default {
+.card {
     border-color: #c0d7f4;
 }
 
-.panel-default>.panel-heading {
+.card-header {
     color: #f4f8ce;
     background-color: #3bc55e;
     border-color: #c0d7f4;
 }
 
-.panel-default>.panel-footer {
+.card-footer {
     background-color: #fff;
 }
 
@@ -49,42 +49,69 @@ a.list-group-item {
 }
 
 a.list-group-item:hover {
-    color: #fff;
-    background-color: #96f7ae;
+    color: #000;
+    background-color: #cdf8d8;
 }
 
-a.list-group-item:active,
+a.list-group-item-primary {
+    color: #fff;
+    background-color: #5a98f6;
+}
+
+a.list-group-item-action.list-group-item-primary:hover {
+    color: #fff;
+    background-color: #5a98f6b4;
+}
+
 a.list-group-item:active:focus,
 a.list-group-item:active:hover {
     color: #fff;
-    background-color: #96f7ae;
+    background-color: #7fc793;
 }
 
+
 a {
-    color: #474a;
+    color: #5a9468;
     text-decoration: none;
 }
 
-a:hocer {
-    color: #4909;
-}
-
-.btn-default:hover {
-    color: #fff;
-    background-color: #96f7ae;
+a:hover {
+    color: #66be7c74;
 }
 
 .btn {
-    border-color: #474a;
+    border-color: #c0d7f4;
 }
 
 .btn-primary {
-    background-color: #474a;
-    border-color: #474a;
+    background-color: #0d6efd;
 }
 
 .btn-primary:hover {
-    background-color: #4909;
+    border-color: #0d6efd;
+    background-color: #0e6efd8b;
+}
+
+.btn-secondary {
+    background-color: #a1abb5;
+}
+
+.btn-secondary:hover {
+    border-color: #a1abb5;
+    background-color: #a1abb58b;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    border-color: #dc3545;
+    background-color: #dc35468b;
+}
+
+.btn-light:hover {
+    background-color: #cdf8d8;
 }
 
 .table td:nth-child(2),

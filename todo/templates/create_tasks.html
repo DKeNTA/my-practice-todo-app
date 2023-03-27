@@ -6,12 +6,12 @@
 {% endblock %}
 
 {% block task_content %}
-    <div class="panel-heading">タスクを追加する </div>
-    <div class="panel-body">
+    <div class="card-header">タスクを追加する </div>
+    <div class="card-body">
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <div class="text-right">
+            <div class="text-end">
                 <button type="submit" class="btn btn-primary">追加</button>
             </div>
         </form>
