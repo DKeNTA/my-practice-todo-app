@@ -1,8 +1,8 @@
 {% extends 'index.html' %}
 
 {% block styles %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/themes/material_blue.css">
 {% endblock %}
 
 {% block task_content %}
@@ -48,12 +48,12 @@
 {% endblock %}
 
 {% block script %}
-    <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
-    <script src="https://npmcdn.com/flatpickr/dist/l10n/ja.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ja.js"></script>
     <script>
-        flatpickr(document.getElementByName('due_date'), {
+        flatpickr(document.getElementsByName('due_date'), {
             locale: 'ja',
             minDate: new Date()
-        })
+        });
     </script>
 {% endblock %}
