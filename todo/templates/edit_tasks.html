@@ -12,7 +12,35 @@
             {% csrf_token %}
             {{ form.as_p }}
             <div class="text-end">
-                <a href="{% url 'tasks.delete' folder_id=current_folder_id task_id=task_id %}" class="btn btn-danger">削除</a>
+                <button 
+                type="button"
+                class="btn btn-danger" 
+                data-bs-toggle="modal"
+                data-bs-target="#deleteModal">
+                    タスクを削除する
+                </button>
+                <div 
+                class="modal fade" 
+                id="deleteModal" 
+                tabindex="-1"
+                aria-labelledby="deleteModalLabel"
+                aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">タスクの削除</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                本当に削除しますか？
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                                <a href="{% url 'tasks.delete' folder_id=current_folder_id task_id=task_id%}" class="btn btn-danger">削除</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary">完了</button>
             </div>
         </form>

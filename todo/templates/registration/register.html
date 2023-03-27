@@ -4,17 +4,15 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-6">
-                <nav class="card">
+                <div class="card">
                     <div class="card-header">新規ユーザー登録</div>
                     <div class="card-body">
                         <form method="POST">
                             {% csrf_token %}
                             {% for field in form %}
-                                <div class="form-group has-feedback">
+                                <div class="mb-2">
                                   {{ field }}
                                 </div>
-                            {% endfor %}
-                            {% for field in form %}
                                 {% for error in field.errors %}
                                     <div class="alert alert-danger" role="alert">
                                       <p>{{ error }}</p>
@@ -31,7 +29,7 @@
                             <a href="{% url 'login' %}" class="btn btn-primary">ログイン画面へ</a>
                         </div>
                     </div>
-                </nav>
+                </div>
             </div>
         </div>
     </div>
