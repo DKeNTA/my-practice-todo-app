@@ -8,6 +8,7 @@ class Folder(models.Model):
     title = models.CharField(max_length=50)
     created_at = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    order = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -21,6 +22,7 @@ class Task(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(blank=True, null=True)
     folder = models.ForeignKey(Folder, on_delete=models.CASCADE)
+    order = models.PositiveIntegerField(default=0)
 
     def publish(self):
         self.updated_at = timezone.now()
