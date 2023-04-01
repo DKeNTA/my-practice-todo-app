@@ -18,6 +18,7 @@ body {
 
 .my-navbar-brand {
     font-size: 50px;
+    text-decoration: none;
 }
 
 .my-navbar-brand,
@@ -27,7 +28,7 @@ body {
 
 .my-navbar-brand:hover,
 a.my-navbar-item:hover {
-    color: #5be6a5
+    color: #5be6a5b0
 }
 
 .card {
