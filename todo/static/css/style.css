@@ -70,16 +70,6 @@ a.list-group-item:active:hover {
     background-color: #7fc793;
 }
 
-
-a {
-    color: #5a9468;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #66be7c74;
-}
-
 .btn {
     border-color: #c0d7f4;
 }
@@ -117,6 +107,16 @@ a:hover {
 
 tr:hover td {
     background-color: #cdf8d8;
+}
+
+.task-title {
+    text-decoration: none;
+    color: #000;
+    display: block;
+}
+
+.task-title:hover {
+    color: #000;
 }
 
 .table td:nth-child(2),
