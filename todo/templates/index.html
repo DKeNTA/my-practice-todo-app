@@ -7,16 +7,18 @@
                 <div class="card">
                     <div class="card-header">フォルダー</div>
                     <div class="card-body">
-                        <ul class="list-group list-group-flush">
+                        <ul class="list-group list-group-flush sortable" data-type="folder">
                             {% for folder in folders %}
-                                <a 
-                                href="{% url 'tasks.index' folder_id=folder.id %}" 
-                                class="list-group-item list-group-item-action
-                                {% if folder.id == current_folder_id %}
-                                    list-group-item-primary
-                                {% endif %}">
-                                    {{ folder.title }}
-                                </a>
+                                <li style="list-style-type: none;" data-id="{{ folder.id }}">
+                                    <a href="{% url 'tasks.index' folder_id=folder.id %}" 
+                                       class="list-group-item list-group-item-action
+                                       {% if folder.id == current_folder_id %}
+                                           list-group-item-primary
+                                       {% endif %}"
+                                       >
+                                        {{ folder.title }}
+                                    </a>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -41,9 +43,9 @@
                                             <th>期限</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="sortable" data-type="task" data-parent-id="{{ current_folder_id }}">
                                         {% for task in tasks %}
-                                            <tr>
+                                            <tr data-id="{{ task.id }}">
                                                 <td>{{ task.title }}</td>
                                                 <td>
                                                     <div class="text-center">
@@ -107,4 +109,35 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var sortables = document.querySelectorAll('.sortable');
+            sortables.forEach(function (sortable) {
+                Sortable.create(sortable, {
+                    onEnd: function (evt) {
+                        var order = [];
+                        for (var i = 0; i < sortable.children.length; i++) {
+                            if (sortable.children[i].dataset.id) {
+                                order.push(sortable.children[i].dataset.id);
+                            }
+                        }
+                        var url = 'update_order';
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', url);
+                        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+                        xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+                        xhr.send(JSON.stringify({
+                            'type': sortable.dataset.type,
+                            'parent_id': sortable.dataset.parentId,
+                            'order': order
+                        }));
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}
