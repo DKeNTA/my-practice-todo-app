@@ -46,7 +46,6 @@ a.my-navbar-item:hover {
 
 a.list-group-item {
     border-color: #c0d7f4;
-    list-style-type: none;
 }
 
 a.list-group-item:hover {
@@ -64,8 +63,7 @@ a.list-group-item-action.list-group-item-primary:hover {
     background-color: #5a98f6b4;
 }
 
-a.list-group-item:active:focus,
-a.list-group-item:active:hover {
+a.list-group-item:active {
     color: #fff;
     background-color: #7fc793;
 }
@@ -107,6 +105,14 @@ a.list-group-item:active:hover {
 
 tr:hover td {
     background-color: #cdf8d8;
+}
+
+tr:active td {
+    background-color: #7fc793;
+}
+
+tr:active .task-title {
+    color: #fff;
 }
 
 .task-title {
