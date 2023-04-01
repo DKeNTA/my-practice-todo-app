@@ -44,7 +44,6 @@ a.my-navbar-item:hover {
     background-color: #fff;
 }
 
-
 a.list-group-item {
     border-color: #c0d7f4;
     list-style-type: none;
@@ -113,6 +112,10 @@ a:hover {
 }
 
 .btn-light:hover {
+    background-color: #cdf8d8;
+}
+
+tr:hover td {
     background-color: #cdf8d8;
 }
 
